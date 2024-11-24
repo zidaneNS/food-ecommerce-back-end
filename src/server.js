@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
 const connectDB = require('./config/dbConn.js');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -26,7 +25,7 @@ mongoose.connection.once('open', () => {
     console.log('endpoint for food /food');
     console.log('endpoint for note /note');
     
-    app.listen(PORT, () => {
-        console.log(`server running at https://${PORT}`);
+    app.listen('makansehat-api.vercel.app', () => {
+        console.log(`server running at https://makansehat-api.vercel.app`);
     })
 })
