@@ -14,6 +14,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+app.get('/', (req, res) => {
+    res.send(`the port is ${PORT}`);
+})
+
 app.use('/register', require('./routes/register.js'));
 app.use('/auth', require('./routes/auth.js'));
 app.use('/food', require('./routes/food.js'));
