@@ -30,7 +30,9 @@ mongoose.connection.once('open', () => {
     console.log('endpoint for food /food');
     console.log('endpoint for note /note');
     
-    app.listen(PORT, () => {
-        console.log(`server running at ${PORT}`);
-    })
+    if (process.env.NODE_ENV !== 'production') {
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    }
 })
