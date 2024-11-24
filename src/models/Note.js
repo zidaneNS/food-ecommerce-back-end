@@ -14,24 +14,18 @@ const noteSchema = new Schema({
         type: String,
         required: true
     },
-    shift_key: {
-        type: Number,
-        required: true
-    },
-    viginere_key: {
-        type: String,
-        required: true
-    },
-    des_key: {
-        type: String,
-        required: true
-    },
     data: {
         date: {
             type: String,
             required: true
         },
-        orderInfo: []
+        orderInfo: {
+            order: [],
+            total: {
+                type: Number,
+                required: true
+            }
+        }
     }
 })
 

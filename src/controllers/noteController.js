@@ -38,9 +38,6 @@ const addNote = async (req, res) => {
             shift_text,
             viginere_text,
             des_text,
-            shift_key,
-            viginere_key,
-            des_key,
             data
         });
 
