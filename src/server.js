@@ -29,10 +29,8 @@ mongoose.connection.once('open', () => {
     console.log('endpoint for auth /auth');
     console.log('endpoint for food /food');
     console.log('endpoint for note /note');
-    
-    if (process.env.NODE_ENV !== 'production') {
-        app.listen(PORT, () => {
-            console.log(`Server running on port ${PORT}`);
-        });
-    }
+
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
 })
