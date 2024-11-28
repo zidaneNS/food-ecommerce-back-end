@@ -2,6 +2,8 @@ const Note = require('../models/Note');
 const jwt = require('jsonwebtoken');
 const { format } = require('date-fns');
 const { v4: uuid } = require('uuid');
+const { Enkripsi_shift_chipher, Deskripsi_shift_chipher, generateShiftKey } = require('./shift_chipher')
+const { Enkripsi_vigenere, generateVigenereKey, Deskripsi_vigenere } = require('./vigenere')
 
 const getAllNotes = async (req, res) => {
     try {
@@ -24,14 +26,17 @@ const addNote = async (req, res) => {
             orderInfo: notes
         }
 
-        const shift_key = Math.floor(Math.random()*10000);
-        const viginere_key = uuid();
+        const dataInput = JSON.stringify(data);
+        console.log('data input',dataInput);
+
+        const shift_key = generateShiftKey();
+        const viginere_key = generateVigenereKey();
         const des_key = uuid();
 
         console.log(shift_key);
 
-        const shift_text = jwt.sign(data, shift_key.toString());
-        const viginere_text = jwt.sign(data, viginere_key);
+        const shift_text = Enkripsi_shift_chipher(dataInput, shift_key)
+        const viginere_text = Enkripsi_vigenere(dataInput, viginere_key);
         const des_text = jwt.sign(data, des_key);
 
         const result = await Note.create({
