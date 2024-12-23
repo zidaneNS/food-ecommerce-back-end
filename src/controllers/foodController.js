@@ -3,6 +3,7 @@ const Food = require('../models/Food');
 const getAllFoods = async (req, res) => {
     try {
         const results = await Food.find().exec();
+        console.log('ini berhasil');
          res.json({ success: true, message: 'success retrieving all datas', data: results });
     } catch (err) {
         console.error(err);

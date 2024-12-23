@@ -2,8 +2,8 @@ require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
-const connectDB = require('./config/dbConn.js');
+const PORT = 3000;
+const connectDB = require('../src/config/dbConn.js');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
@@ -18,10 +18,10 @@ app.get('/', (req, res) => {
     res.send(`the port is ${PORT}`);
 })
 
-app.use('/register', require('./routes/register.js'));
-app.use('/auth', require('./routes/auth.js'));
-app.use('/food', require('./routes/food.js'));
-app.use('/note', require('./routes/note.js'));
+app.use('/register', require('../src/routes/register.js'));
+app.use('/auth', require('../src/routes/auth.js'));
+app.use('/food', require('../src/routes/food.js'));
+app.use('/note', require('../src/routes/note.js'));
 
 mongoose.connection.once('open', () => {
     console.log('db connected');
@@ -30,9 +30,13 @@ mongoose.connection.once('open', () => {
     console.log('endpoint for food /food');
     console.log('endpoint for note /note');
 
-    app.listen(PORT, () => {
-        console.log(`Server running on port ${PORT}`);
-    });
+    app.listen(PORT, (err) => {
+        if (err) {
+            console.error(`Failed to start server on port ${PORT}:`, err);
+        } else {
+            console.log(`Server running on port ${PORT}`);
+        }
+    });    
 })
 
 module.exports = app;
